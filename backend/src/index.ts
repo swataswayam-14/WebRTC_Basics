@@ -14,12 +14,12 @@ wss.on('connection', function connection(ws) {
       senderSocket = ws;
     } else if (message.type === 'receiver') {
       receiverSocket = ws;
-    } else if (message.type === 'createOffer') {
+    } else if (message.type === 'createOffer') { //createOffer is sent by the sender
       if (ws !== senderSocket) {
         return;
       }
       receiverSocket?.send(JSON.stringify({ type: 'createOffer', sdp: message.sdp }));
-    } else if (message.type === 'createAnswer') {
+    } else if (message.type === 'createAnswer') { //createAnswer is sent by receiver
         if (ws !== receiverSocket) {
           return;
         }
